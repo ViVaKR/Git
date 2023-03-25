@@ -28,9 +28,16 @@
 > $ git reset --hard
 
 ### 수정 후 staged 상태가 아닌 파일 비교
-> $ git diff
+> $ git diff // Unstaged 상태인 것만 보여줌
 
 ### commit 전에 staging area 의 변경부분 확인
 > $ git diff --staged 
+
+### 변경사항 커밋
+> $ git commit -m "message note"
+> $ git commit -a -m "staging area & commit"
+
+### 파일삭제
+> $ git rm **file Name**
 
 
