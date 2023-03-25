@@ -1,5 +1,10 @@
 # Git Note  
 
+### 기본 환경설정
+> 1. git config --global core.autocrlf input  ' windows -> true
+> 2. git config --global user.name 'full name'
+> 3. git config --global user.email id@email.com
+---
 ### 상태  
 > $ git status  
 > $ git status -s  ' 짤막하게 확인하기
@@ -17,4 +22,15 @@
 3. __build/__ : build/ 디렉토이에 있는 모든 파일 무시
 4. __doc/**/*.pdf__ : doc  디렉토리의 모든 .pdf 파일 무시
 > 기본예제 : [GitIgnore](https://github.com/github/gitignore)
+
+### Refresh the indexes
+> $ git rm --cached -r .
+> $ git reset --hard
+
+### 수정 후 staged 상태가 아닌 파일 비교
+> $ git diff
+
+### commit 전에 staging area 의 변경부분 확인
+> $ git diff --staged 
+
 
