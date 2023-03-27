@@ -35,6 +35,8 @@
 ```bash
     git config --global user.name # 실명 또는 적당한 이름  
     git config --global user.email # 이메일 주소  
+    git config --global core.editor "code --wait"
+    git config --global color.ui true
     git config --global --list #확인하여 보기`
 ``` 
 ---
@@ -66,17 +68,50 @@
     # result -> Agent pid 74204
     ssh-add -K ~/.ssh/id_rsa
 ```
-
-## 상태  
-> $ git status  
-> $ git status -s  ' 짤막하게 확인하기
 ---
 
 ## 추적  
 ```bash
     git add demo.txt # demo.txt 파일 변경사항 추적 시작
+    git add .  # 모든 변경사항을 스테이지에 올림
+    git add ./src # src 디렉토리의 모든 변경사항을 스테이지에 올림
+    git add -p # 변경된 사하을 하나하나 확인하면서 스테이지에 올림
+    
+    # add 취소
+    git restore --staged `<file>` # 특정 파일 add 취소
+    
+    # 커밋을 취소하고 해당 파일들은 staged 상태로
+    # 워킹 디렉토리에 보존
+    git reset --soft HEAD^
+    
+    ## 커밋을 취소하고 해당 파일들은 unstaged 상태로
+    # 워킹 디렉토리에 보존
+    git reset --mixed HEAD^ # 기본옵션사항
+    git reset HEAD^ # 위와 동일
+    git reset HEAD~2 # 마지막 2개의 commit 취소
+    
+    # 커밋을 취소하고 해당 파일들은 unstaged 상태로 
+    # 워킹 디렉토리에서 삭제
+    git reset --hard HEAD^
 ```
 ---
+
+## 상태
+```bash  
+git status  
+git status -s # 짤막하게 확인하기
+git status -v # 변경사항 확인
+```
+---
+## log
+```bash
+    git log
+    git log --oneline
+
+```
+
+## commit
+
 
 ## 제외, 무시
 > $ touch __.gitignore__  // 프로젝트 루트에 '.gitignore' 파일 생성  
@@ -121,16 +156,3 @@
 >>> 커미터(Committer) : 마지막으로 이 작업을 적용한(저장소에 포함시킨) 사람  
 >>>> (ex) 어떤 프로젝트에 패치를 보냈고 그  프로젝트의 담당자가 패치를 적용했다면 두 명의 정보 중
 >>>> 당신이 저자이고 담당자가 커미터가 됨
-
-
-
-
-
-
-
-
-
-
-
-
-
