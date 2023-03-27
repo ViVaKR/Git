@@ -1,19 +1,83 @@
-# Git Note  
-
-### 기본 환경설정
-> 1. git config --global core.autocrlf input  ' windows -> true
-> 2. git config --global user.name 'full name'
-> 3. git config --global user.email id@email.com
+# Git 시작하기
+1. Git 설치 : [Git Download](https://git-scm.com "Git")
+1. Github 회원가입 : [Github](https://github.com "Github")  
+2. 첫 저장소 생성 (Create new repository)  
+3. 생성한 저장소(Repository) 주소 복사 (`Copy` Created Repository URL: HTTPS, SSH or CLI)
+4. 내 컴퓨터에서 가져올 폴더 루트로 이동 : 클론하면 해당 저장소(Repository)가 서브 디렉토리로 자동 생성됨  
+5. 생성한 저장소 가져오기 (Clone): $ git clone `<Repo URL Paste>`
 ---
-### 상태  
+
+*#### 로컬 저장소(Local Repository)을 먼저 만든 후 원격 저장소(Remote Repository)로 Push 하기*
+> or First, Create Local Repository Push to Remote Repository 
+```pwsh
+    echo "# Demo Repo" >> README.md
+    git init
+    git add README.md
+    git commit -m "Add new file README"
+    git remote add origin git@github.com:.......?
+    git push -u origin main
+```
+
+## 용어
+- Repository : 프로젝트가 보관되는 폴더의 위치로 저장소를 의미함
+- Directory : 폴더 (Folder)
+---
+
+## 명령어
+- clone : Github 에서 호스팅 된는 리포지토리를 내 컴퓨터의 현재 폴더로 가져옴.  
+- add : Git 에서 추가한 파일의 변경사항을 추척하도록 함
+- commit : Git 에 파일을 저장함
+- push : 커밋(Commit) 된 파일과 내용들을 Github 원격(Remote) 저장소(Repository)에 전송(Upload)합니다.  
+- pull : push 의 반대로 원격(Remote) 저장소(Repository)에서 내 컴퓨터 현재 프로젝트로 가져옵니다.
+---
+
+## 기본 환경설정 : 전역적인 환경설정
+```bash
+    git config --global user.name # 실명 또는 적당한 이름  
+    git config --global user.email # 이메일 주소  
+    git config --global --list #확인하여 보기`
+``` 
+---
+
+## ssh key 생성
+```bash
+    ssh-keygen -t rsa -b 4096 -C "이메일 주소"
+    # Generatin pulblic/private rsa key pair.
+    # Enter file in shich to save the key (/Users/../.ssh/id_rsa): testkey 
+    # Enter passphrase (empty for no passphrase) : (empty)
+    # generated..
+    ls | grep testkey
+    # testkey (private key, 개인키)
+    # testkey.pub  (public key, 공개키)
+    cat testkey.pub
+    # printed key string....
+    # copy or 
+    pbcopy < ~/.ssh/testkey.pub # copy command
+```
+
+## Github SSH and GPG keys 에 등록하기
+> Add new
+> Add Title, Key (Paste to here)
+> Add SSH key  
+
+```bash
+    eval  "$(ssh-agent -s)"
+    # result -> Agent pid 74204
+
+```
+
+## 상태  
 > $ git status  
 > $ git status -s  ' 짤막하게 확인하기
+---
 
-### 추적  
-> $ git add .
-> $ git add **fileName**
+## 추적  
+```bash
+    git add demo.txt # demo.txt 파일 변경사항 추적 시작
+```
+---
 
-### 제외, 무시
+## 제외, 무시
 > $ touch __.gitignore__  // 프로젝트 루트에 '.gitignore' 파일 생성  
 > $ echo *.log >> .gitignore  // 모든 log 파일 무시 예시  
 - 표준 Glob  패턴 사용, 프로젝트 전체에 해당됨  
