@@ -60,10 +60,11 @@
 > Add Title, Key (Paste to here)
 > Add SSH key  
 
+## (MacOS) Add SSH key to the ssh-agent
 ```bash
     eval  "$(ssh-agent -s)"
     # result -> Agent pid 74204
-
+    ssh-add -K ~/.ssh/id_rsa
 ```
 
 ## 상태  
@@ -87,24 +88,24 @@
 4. __doc/**/*.pdf__ : doc  디렉토리의 모든 .pdf 파일 무시
 > 기본예제 : [GitIgnore](https://github.com/github/gitignore)
 
-### Refresh the indexes
+## Refresh the indexes
 > $ git rm --cached -r .
 > $ git reset --hard
 
-### 수정 후 staged 상태가 아닌 파일 비교
+## 수정 후 staged 상태가 아닌 파일 비교
 > $ git diff // Unstaged 상태인 것만 보여줌
 
-### commit 전에 staging area 의 변경부분 확인
+## commit 전에 staging area 의 변경부분 확인
 > $ git diff --staged 
 
-### 변경사항 커밋
+## 변경사항 커밋
 > $ git commit -m "message note"
 > $ git commit -a -m "staging area & commit"
 
-### 파일삭제
+## 파일삭제
 > $ git rm **file Name**  & rm **file Name**
 
-### 저장소 복제, Clone
+## 저장소 복제, Clone
 > $ git clone [깃링크](git@github.com:ViVaKR/GitNote.git)  
 > $ git log  // 상태 확인  
 >> 순간순으로 커밋 히스토리 보여줌  
