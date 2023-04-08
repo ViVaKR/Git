@@ -8,6 +8,7 @@
     git config --global user.name "Kim Bum Jun"
     git config --global user.email "hello@email.com"
     git config --global color.ui auto
+    git config --global core.safecrlf false
 ```
 
 ## Github 회원가입 : [Github](https://github.com "Github")  
