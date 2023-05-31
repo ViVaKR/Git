@@ -1,15 +1,4 @@
-# Git 시작하기
-
-## Git 설치 : [Git Download](https://git-scm.com "Git")
-
-## Git 처음 환경설정
-
-```bash
-    git config --global user.name "Kim Bum Jun"
-    git config --global user.email "hello@email.com"
-    git config --global color.ui auto
-    git config --global core.safecrlf false
-```
+# Git
 
 ## Github 회원가입 : [Github](https://github.com "Github")  
 
@@ -18,21 +7,46 @@
 3. 내 컴퓨터에서 가져올 폴더 루트로 이동 : 클론하면 해당 저장소(Repository)가 서브 디렉토리로 자동 생성됨  
 4. 생성한 저장소 가져오기 (Clone): $ git clone `<Repo URL Paste>`
 
----
+## Git 설치 : [Git Download](https://git-scm.com "Git")
 
-## 로컬 저장소(Local Repository)을 먼저 만든 후 원격 저장소(Remote Repository)로 Push 하기
-
-> or First, Create Local Repository Push to Remote Repository
+## Git 최초 환경설정
 
 ```bash
-mkdir learnin-git  # 작업폴더 생성
-cd learning-gi
-echo "# Demo Repo" >> README.md # README File 만들기
-git init . # 초기화 .git 로컬 저장소 생성 
-git add README.md # or `$ git add .` 스태이징 에리어에 추적할 파일 추가
-git commit -m "Add new file README" # 
-git remote add origin git@github.com:...? # 푸시할 원격 저장소 추가 (처음 한번)
-git push -u origin main # 원격 저장소에 저장
+    git config --global user.name "Kim Bum Jun"
+    git config --global user.email "hello@email.com"
+    git config --global color.ui auto
+    git config --global core.safecrlf false
+    git config --global core.editor ""
+    git config --global core.editor "code --wait"
+    git config --global color.ui true
+    git config --global --list # 전역설정 확인
+
+    git add -h # Help
+```
+
+##  Git 저장소 생성
+
+```bash
+    mkdir domo-git      # 작업폴더 생성
+    cd demo-git
+    echo "# Demo Repo" >> README.md # README File 만들기
+    git init .          # 초기화 .git 로컬 저장소 생성 
+    git add README.md   # or `$ git add .` 스태이징 에리어에 추적할 파일 추가
+    git status          # git status -s (짤막하게 확인하기, --short)
+    git diff            # 수정했지만 아직 staged 상태가 아닌 파일을 배교해 보기
+    git diff --staged   # 저장소에 커밋한 것과 staging area 에 있는 것을 비교
+    git rm file-name -f   # 실제 파일도 삭제됨
+    git rm file-name --cached file-name  # staging area 에서만 제거하고 워킹에서는 지우지 않음
+    git rm log/\*.log   # 패턴 사용으로 다수의 파일 또는 디렉토리 삭제하기
+    git rm \*~          # ~ 로 끝나는 파일을 모두 삭제
+    git mv README.md  CHANGE.md     # 파일 이름 변경하기
+
+
+    git commit -m "Add new file README" 
+    git remote add origin git@github.com:...? # 푸시할 원격 저장소 추가 (처음 한번)
+    git clone https://github.com/ViVaKR/Git.git
+    
+    git push -u origin main # 원격 저장소에 저장
 ```
 
 ## 흐름도
@@ -56,17 +70,7 @@ git push -u origin main # 원격 저장소에 저장
 
 ---
 
-## 기본 환경설정 : 전역적인 환경설정
 
-```bash
-    git config --global user.name # 실명 또는 적당한 이름  
-    git config --global user.email # 이메일 주소  
-    git config --global core.editor "code --wait"
-    git config --global color.ui true
-    git config --global --list #확인하여 보기`
-```
-
----
 
 ## ssh key 생성
 
@@ -94,7 +98,7 @@ git push -u origin main # 원격 저장소에 저장
 ## (MacOS) Add SSH key to the ssh-agent
 
 ```bash
-    eval  "$(ssh-agent -s)"
+    eval "$(ssh-agent -s)"
     # result -> Agent pid 74204
     ssh-add -K ~/.ssh/id_rsa
 ```
