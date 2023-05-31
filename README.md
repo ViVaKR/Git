@@ -276,3 +276,13 @@ git status -v # 변경사항 확인
 ```
 
 ## Test 
+
+## Reset
+
+## Restore
+```bash
+
+    git add .
+    ## upstage
+    git restore --staged README.md
+```
