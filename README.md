@@ -206,10 +206,71 @@ git status -v # 변경사항 확인
 >>> 커미터(Committer) : 마지막으로 이 작업을 적용한(저장소에 포함시킨) 사람  
 >>>> (ex) 어떤 프로젝트에 패치를 보냈고 그  프로젝트의 담당자가 패치를 적용했다면 두 명의 정보 중
 >>>> 당신이 저자이고 담당자가 커미터가 됨
+
+## 되돌리기 (Undo)
+
+- 완료한 커밋을 수정해야 할 때 
+- 너무 일찍 커밋, 파일누락, 커밋 메시지를 수정할 때
+- 주의 : 한번 되돌리면 복구할 수 없음
+- 
+
+```bash
+
+    git commit --amend
+
+```
+
 ## ETC
 
 - 기타 명령모음
 
 ```bash
+    git log -p -2   # -p: 각 커밋의 diff 결과, -2: 최근 두개의 결과
+
+    # 어떤 파일이 수정/변경/추가 또는 삭제 되었는지에 대한 요약정보
+    git log stat
+
+    
+    # oneline : 각각의 커밋을 한 라인으로 보여줌
+    git log --pretty=oneline
+
+    # format : (형식지정) 67da7a9 - ViVaKR, 8분 전 : Update README [ETC]
+    # %H : 커밋해시
+    # %h :
+    # %T : 
+    # %t : 짧은
+    # %P : 부모 해시
+    # an : 저자 이름
+    # ae : 저자 메일
+    # %ad : 저자 시각 (형식은 –-date=옵션 참고)
+    # %ar : 저자 상대적 시각
+    # %cn : 커미터 이름
+    # %ce : 커미터 메일
+    # %cd : 커미터 시각
+    # %cr : 커미터 상대적 시각
+    # %s : 요약
+    # 저자 (Author) : 원래의 작업을 수행한 원작자
+    # 커미터 (Committer) : 마지막으로 이작업을 적용한 (저장소에 포함시킨) 사람
+    git log --pretty=format:"%h - %an, %ar : %s"
+    git log --pretty=format: "%h %s" --graph
+
+    # -p : 각 커밋에 적용된 패치를 보여줌
+    # --stat : 각 커밋에서 수정된 파일의 통계정보
+    # --shortstat : --stat 명령의 결과 중에서 수정한 파일, 추가된 라인, 삭제된 라인만
+    # --name-only : 커밋 정보중에서 수정된 파일의 목록만 보여줌
+    # --name-status : 커밋 구분을 보여줌 (추가, 수정, 삭제 여부)
+    # --abbrev-commit : 체크섬의 처음 몇 자만 보여줌
+    # --relative-date : 상대적인 시간을 보여줌
+    # --graph : 브랜치와 머지 히스토리 정보를 아스키 그래프로 보여줌
+    # --pretty : online, short, full, fuller, format
+    # --oneline : --pretty=oneline, --abbrev-commit 두옵션을 함께 사용하는 것
+    # -(n) : 최근 n 개의 커밋만 조회
+    # --since, --after : 명시한 날짜 이후의 커밋만 조회
+    # --until, --befor : 명시한 날짜 이전의 커밋만 조회
+    # --author : 입력한 저장의 커밋만 보여줌
+    # --committer : 입력한 커미터의 커밋만 보여줌
+    # --grep : 커밋 메시지 안의 텍스트를 검색
+    # -S : 커밋 내용안의 텍스틀 검색
+    git log --since=2.weeks  # 지난 2주간
 
 ```
