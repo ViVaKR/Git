@@ -283,6 +283,9 @@ git status -v # 변경사항 확인
 ```bash
 
     git add .
-    ## upstage
+
+    # 파일상태를 Unstage 로 변경하기
+
     git restore --staged README.md
+    git reset HEAD <file>
 ```
