@@ -6,6 +6,7 @@
     git help --all
 
     git add .
+    git add -p
     git status
 
     git restore --staged .
@@ -16,6 +17,19 @@
 
     # Commit without Stage
     git commit -a -m "Update EX.md [bash]"
+
+    git remote -v
+
+    # Remote
+    # To connect the local repository to a remote server.
+    git remote add origin <host or remoteURL>
+
+    # Delete a connection to a specified remote repository
+    git remote rm <name of repository>
+
+    # New Git Branch
+    git branch <New Branch Name>
+    
 ```
 
 ## Short status flags
