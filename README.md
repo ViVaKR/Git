@@ -40,12 +40,13 @@
     git rm log/\*.log   # 패턴 사용으로 다수의 파일 또는 디렉토리 삭제하기
     git rm \*~          # ~ 로 끝나는 파일을 모두 삭제
     git mv README.md  CHANGE.md     # 파일 이름 변경하기
-
-
     git commit -m "Add new file README" 
     git remote add origin git@github.com:...? # 푸시할 원격 저장소 추가 (처음 한번)
+    git remove -v # 모든 원격 리포지토리 보기
+    git remote show origin # 
     git clone https://github.com/ViVaKR/Git.git
-    
+    git log -p  # 커밋기록 및 변경사항 포함.
+    git show commit-id # 특정커밋 표시
     git push -u origin main # 원격 저장소에 저장
 ```
 
@@ -67,10 +68,6 @@
 - commit : Git 에 파일을 저장함
 - push : 커밋(Commit) 된 파일과 내용들을 Github 원격(Remote) 저장소(Repository)에 전송(Upload)합니다.  
 - pull : push 의 반대로 원격(Remote) 저장소(Repository)에서 내 컴퓨터 현재 프로젝트로 가져옵니다.
-
----
-
-
 
 ## ssh key 생성
 
@@ -102,8 +99,6 @@
     # result -> Agent pid 74204
     ssh-add -K ~/.ssh/id_rsa
 ```
-
----
 
 ## 추적  
 
@@ -141,16 +136,6 @@ git status -s # 짤막하게 확인하기
 git status -v # 변경사항 확인
 ```
 
----
-
-## log
-
-```bash
-    git log
-    git log --oneline
-
-```
-
 ## commit
 
 ## 제외, 무시
@@ -168,13 +153,17 @@ git status -v # 변경사항 확인
 > 기본예제 : [GitIgnore](https://github.com/github/gitignore)
 
 ## Refresh the indexes
->
-> $ git rm --cached -r .
-> $ git reset --hard
+
+```bash
+    git rm --cached -r .
+    git reset --hard
+```
 
 ## 수정 후 staged 상태가 아닌 파일 비교
->
-> $ git diff // Unstaged 상태인 것만 보여줌
+
+```bash
+    git diff # Unstaged 상태인 것만 보여줌
+```
 
 ## commit 전에 staging area 의 변경부분 확인
 >
@@ -212,25 +201,62 @@ git status -v # 변경사항 확인
 - 완료한 커밋을 수정해야 할 때 
 - 너무 일찍 커밋, 파일누락, 커밋 메시지를 수정할 때
 - 주의 : 한번 되돌리면 복구할 수 없음
-- 
 
 ```bash
-
+    # 가장 최근의 커밋을 수정하고 변경 내용을 추가
     git commit --amend
+    # 준비되지 않은 변경사항 되돌리기
+    git checkout filename
 
+    # 마지막 커밋 롤백
+    git revert HEAD
+
+    # 이전 커밋을 롤백
+    git revert commit-id
 ```
 
-## ETC
-
-- 기타 명령모음
+## Restore
 
 ```bash
+    git add .
+    # 파일상태를 Unstage 로 변경하기
+    git restore --staged README.md
+    git reset HEAD <file>
+```
+
+## branch
+
+```bash
+    # 새로운 분기 생성
+    git branch branch-name
+
+    # 새로우 분기로 전환
+    git checkout branch-name
+
+    # 분기 생성 후 즉시 전환
+    git checkout -b branch-name
+
+    # 분기 목록
+    git branch
+
+    # 분기삭제
+    git branch -d branch-name
+
+    # 원격 분기 이름표시
+    git branch -r
+```
+
+## log
+
+```bash
+    git log
+    git log --stat
+    git log --oneline
+
     git log -p -2   # -p: 각 커밋의 diff 결과, -2: 최근 두개의 결과
 
     # 어떤 파일이 수정/변경/추가 또는 삭제 되었는지에 대한 요약정보
     git log stat
-
-    
     # oneline : 각각의 커밋을 한 라인으로 보여줌
     git log --pretty=oneline
 
@@ -273,19 +299,40 @@ git status -v # 변경사항 확인
     # -S : 커밋 내용안의 텍스틀 검색
     git log --since=2.weeks  # 지난 2주간
 
+    # 커밋 로그를 그래프로 표시
+    git log --graph --oneline
+    git log --graph --oneline --all
 ```
-
-## Test 
-
 ## Reset
 
-## Restore
 ```bash
-
-    git add .
-
-    # 파일상태를 Unstage 로 변경하기
-
-    git restore --staged README.md
-    git reset HEAD <file>
+    git reset HEAD filename
+    git reset HEAD -p
 ```
+
+## merge 
+
+```bash
+    git merge --abort
+    git merge origin/main
+    git remote update
+```
+
+## rebase
+
+```bash
+    git rebase branch-name
+
+    # 대화식 실행
+    git rebase -i main
+```
+
+## ETC
+
+```bash
+    git push -u origin branch-name
+    git push --delete origin branch-name
+    git push -f
+```
+
+
