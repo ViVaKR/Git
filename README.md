@@ -9,7 +9,7 @@
 
 ## Git 설치 : [Git Download](https://git-scm.com "Git")
 
-## Git 최초 환경설정
+## Git Global Settings 환경설정
 
 ```bash
     git config --global user.name "Kim Bum Jun"
@@ -19,6 +19,7 @@
     git config --global core.editor ""
     git config --global core.editor "code --wait"
     git config --global color.ui true
+    git config --global pull.rebase false # merge
     git config --global --list # 전역설정 확인
 
     git add -h # Help
@@ -228,22 +229,27 @@ git status -v # 변경사항 확인
 
 ```bash
     # 새로운 분기 생성
-    git branch branch-name
+    git branch `branch-name`
 
     # 새로우 분기로 전환
-    git checkout branch-name
+    git checkout `branch-name``
 
     # 분기 생성 후 즉시 전환
-    git checkout -b branch-name
+    git checkout -b `branch-name``
 
     # 분기 목록
     git branch
 
-    # 분기삭제
-    git branch -d branch-name
+    
 
     # 원격 분기 이름표시
     git branch -r
+
+    # git branch push to remote
+    git push --set-upstream origin "브렌치명"
+
+    # 분기삭제
+    git branch -d branch-name
 ```
 
 ## log
