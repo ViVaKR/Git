@@ -14,9 +14,8 @@
 ## Git 최초 환경설정
 
 ```bash
-    git config --global user.name "Kim Bum Jun"
-    git config --global user.email "hello@email.com"
-    git config --global color.ui auto
+    git config --global user.name "<이름>"
+    git config --global user.email "<이메일주소>"
     git config --global core.safecrlf false
     git config --global core.editor "code --wait"
     git config --global color.ui true
@@ -89,9 +88,9 @@
 
 ## Github SSH and GPG keys 에 등록하기
 
-> Add new
-> Add Title, Key (Paste to here)
-> Add SSH key
+* Add new
+* Add Title, Key (Paste to here)
+* Add SSH key
 
 ## (MacOS) Add SSH key to the ssh-agent
 
@@ -107,7 +106,7 @@
     git add demo.txt # demo.txt 파일 변경사항 추적 시작
     git add .  # 모든 변경사항을 스테이지에 올림
     git add ./src # src 디렉토리의 모든 변경사항을 스테이지에 올림
-    git add -p # 변경된 사하을 하나하나 확인하면서 스테이지에 올림
+    git add -p # 변경된 사항 하나하나 확인하면서 스테이지에 올림
 
     # add 취소
     git restore --staged `<file>` # 특정 파일 add 취소
@@ -127,8 +126,6 @@
     git reset --hard HEAD^
 ```
 
----
-
 ## 상태
 
 ```bash
@@ -141,17 +138,17 @@ git status -v # 변경사항 확인
 
 ## 제외, 무시
 
-> $ touch **.gitignore** // 프로젝트 루트에 '.gitignore' 파일 생성  
-> $ echo \*.log >> .gitignore // 모든 log 파일 무시 예시
+> `$ touch .gitignore` // 프로젝트 루트에 '.gitignore' 파일 생성  
+> `$ echo \*.log >> .gitignore` // 모든 log 파일 무시 예시
 
 * 표준 Glob 패턴 사용, 프로젝트 전체에 해당됨
 
-1. **.a** : 확장자가 .a 인 파일 전체 제외
-2. **!lib.a** : lib.a 는 제외하지 않음
-3. **build/** : build/ 디렉토이에 있는 모든 파일 무시
-4. **doc/\**/*.pdf** : doc 디렉토리의 모든 .pdf 파일 무시
+1. `.a` : 확장자가 .a 인 파일 전체 제외
+2. `!lib.a` : lib.a 는 제외하지 않음
+3. `build` : build/ 디렉토이에 있는 모든 파일 무시
+4. `doc/\**/*.pdf` : doc 디렉토리의 모든 .pdf 파일 무시
 
-> 기본예제 : [GitIgnore](https://github.com/github/gitignore)
+* 기본예제 : [GitIgnore](https://github.com/github/gitignore)
 
 ## Refresh the indexes
 
@@ -177,20 +174,20 @@ git status -v # 변경사항 확인
 
 ## 파일삭제
 
-> $ git rm **file Name** & rm **file Name**
+> $ git rm `file Name` & rm `file Name`
 
 ## 저장소 복제, Clone
 
 > $ git clone [깃링크](git@github.com:ViVaKR/GitNote.git)  
-> $ git log // 상태 확인
+> $ git log : 상태 확인
 >
 > > 순간순으로 커밋 히스토리 보여줌  
 > > 가장 최근 커밋이 가장 먼저 표시됨  
-> > $ **git log -p** // 각 커밋의 diff 결과 표시  
-> > $ **git log -p -2** // 최근 두개의 결과만 표시, 즉 동료가 무엇을 했는지 확인가능  
-> > $ **git log --stat** // 각 커밋의 통계 정보 조회, 요약정보는 가장 뒤에 표시됨  
-> > $ **git log --pretty=oneline** // 각 커밋을 하나의 라인으로 보여줌  
-> > $ **git log --pretty=format:"%h - %an, %ar : %s"** // 결과를 포맷 일치 파싱
+> > $ `git log -p` : 각 커밋의 diff 결과 표시  
+> > $ `git log -p -2` : 최근 두개의 결과만 표시, 즉 동료가 무엇을 했는지 확인가능  
+> > $ `git log --stat` : 각 커밋의 통계 정보 조회, 요약정보는 가장 뒤에 표시됨  
+> > $ `git log --pretty=oneline` : 각 커밋을 하나의 라인으로 보여줌  
+> > $ `git log --pretty=format:"%h - %an, %ar : %s"` : 결과를 포맷 일치 파싱
 > >
 > > > format options :
 > > > %H, %h, %T, %t, %P, %p, %an, %ae, %ad, %ar, %cn, %ce, % %cd, %cr, %s  
@@ -207,8 +204,10 @@ git status -v # 변경사항 확인
 * 주의 : 한번 되돌리면 복구할 수 없음
 
 ```bash
+
     # 가장 최근의 커밋을 수정하고 변경 내용을 추가
     git commit --amend
+
     # 준비되지 않은 변경사항 되돌리기
     git checkout filename
 
@@ -217,6 +216,7 @@ git status -v # 변경사항 확인
 
     # 이전 커밋을 롤백
     git revert commit-id
+    
 ```
 
 ## Restore
