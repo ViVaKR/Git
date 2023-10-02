@@ -366,3 +366,18 @@ git status -v # 변경사항 확인
  echo "Hello world"
  
 ```
+
+## Remove from .gitignore
+
+```bash
+
+# signle target 
+git rm -r --cached <file or folder>
+
+# all target from .gitignore
+git rm --cached `git ls-files -i -c --exclude-from=.gitignore` 
+
+
+git commit -m 'Removed all files that are in the .gitignore' 
+git push origin main
+```
