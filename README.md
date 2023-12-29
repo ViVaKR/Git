@@ -172,9 +172,51 @@ git status -v # 변경사항 확인
 > $ git commit -m "message note"
 > $ git commit -a -m "staging area & commit"
 
-## 파일삭제
+## Gitignore Global
 
-> $ git rm `file Name` & rm `file Name`
+```bash
+
+    # macos
+    $ git config --global core.excludesFile '~/.gitignore'
+
+    # windows
+    $ git config --global core.excludesFile "%USERPROFILE%\.gitignore"
+    $ git config --global core.excludesFile "$Env:USERPROFILE\.gitignore"
+```
+
+## Delete file or floder
+
+```bash
+
+    # 원격 저장소와 로컬 저장소에 있는 파일을 삭제
+    $ git rm <fileName>
+
+    # example
+    $ git rm --cached .DS_Store
+
+    # 원격 저장소의 파일만 삭제, 로컬 저장소 파일은 삭제하지 않음
+    $ git rm --cached <fileName>
+
+    # 폴더 삭제 #
+    # 로컬 디렉토리와 git 저장소에서 모두 삭제
+    $ git rm -rf 폴더명
+    $ git commit -m "delete folder"
+
+    # 로컬 디펙토리의 폴더는 유지하고 git 저장소에서만 폴더 삭제
+    $ git rm --cached -r bin/
+    $ git commit -m "delete folder"
+
+    # Remove from .gitignore #
+
+    # signle target 
+    $ git rm -r --cached <file or folder>
+
+    # all target from .gitignore
+    $ git rm --cached `git ls-files -i -c --exclude-from=.gitignore` 
+
+    $ git commit -m 'Removed all files that are in the .gitignore' 
+    git push origin main
+```
 
 ## 저장소 복제, Clone
 
@@ -367,17 +409,4 @@ git status -v # 변경사항 확인
  
 ```
 
-## Remove from .gitignore
 
-```bash
-
-# signle target 
-git rm -r --cached <file or folder>
-
-# all target from .gitignore
-git rm --cached `git ls-files -i -c --exclude-from=.gitignore` 
-
-
-git commit -m 'Removed all files that are in the .gitignore' 
-git push origin main
-```
