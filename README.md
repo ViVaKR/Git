@@ -16,6 +16,10 @@
 ```bash
     git config --global user.name "<이름>"
     git config --global user.email "<이메일주소>"
+
+    # true : 개행문자가 혼재할 경우 안전을 위해 이후의 처리를 중단함
+    # warn : 개행문자가 혼재할 경우 경고를 출력하고 처리는 계속 진행함
+    # false :  core.autocrlf 설정에 의해 변환  수행
     git config --global core.safecrlf false
     git config --global core.editor "code --wait"
     git config --global color.ui true
@@ -138,7 +142,7 @@ git status -v # 변경사항 확인
 
 ## 제외, 무시
 
-> `$ touch .gitignore` // 프로젝트 루트에 '.gitignore' 파일 생성  
+> `$ touch .gitignore` // 프로젝트 루트에 '.gitignore' 파일 생성
 > `$ echo \*.log >> .gitignore` // 모든 log 파일 무시 예시
 
 * 표준 Glob 패턴 사용, 프로젝트 전체에 해당됨
@@ -208,32 +212,32 @@ git status -v # 변경사항 확인
 
     # Remove from .gitignore #
 
-    # signle target 
+    # signle target
     $ git rm -r --cached <file or folder>
 
     # all target from .gitignore
-    $ git rm --cached `git ls-files -i -c --exclude-from=.gitignore` 
+    $ git rm --cached `git ls-files -i -c --exclude-from=.gitignore`
 
-    $ git commit -m 'Removed all files that are in the .gitignore' 
+    $ git commit -m 'Removed all files that are in the .gitignore'
     git push origin main
 ```
 
 ## 저장소 복제, Clone
 
-> $ git clone [깃링크](git@github.com:ViVaKR/GitNote.git)  
+> $ git clone [깃링크](git@github.com:ViVaKR/GitNote.git)
 > $ git log : 상태 확인
 >
-> > 순간순으로 커밋 히스토리 보여줌  
-> > 가장 최근 커밋이 가장 먼저 표시됨  
-> > $ `git log -p` : 각 커밋의 diff 결과 표시  
-> > $ `git log -p -2` : 최근 두개의 결과만 표시, 즉 동료가 무엇을 했는지 확인가능  
-> > $ `git log --stat` : 각 커밋의 통계 정보 조회, 요약정보는 가장 뒤에 표시됨  
-> > $ `git log --pretty=oneline` : 각 커밋을 하나의 라인으로 보여줌  
+> > 순간순으로 커밋 히스토리 보여줌
+> > 가장 최근 커밋이 가장 먼저 표시됨
+> > $ `git log -p` : 각 커밋의 diff 결과 표시
+> > $ `git log -p -2` : 최근 두개의 결과만 표시, 즉 동료가 무엇을 했는지 확인가능
+> > $ `git log --stat` : 각 커밋의 통계 정보 조회, 요약정보는 가장 뒤에 표시됨
+> > $ `git log --pretty=oneline` : 각 커밋을 하나의 라인으로 보여줌
 > > $ `git log --pretty=format:"%h - %an, %ar : %s"` : 결과를 포맷 일치 파싱
 > >
 > > > format options :
-> > > %H, %h, %T, %t, %P, %p, %an, %ae, %ad, %ar, %cn, %ce, % %cd, %cr, %s  
-> > > 저자(Author) : 원 작업을 수행한 사람  
+> > > %H, %h, %T, %t, %P, %p, %an, %ae, %ad, %ar, %cn, %ce, % %cd, %cr, %s
+> > > 저자(Author) : 원 작업을 수행한 사람
 > > > 커미터(Committer) : 마지막으로 이 작업을 적용한(저장소에 포함시킨) 사람
 > > >
 > > > > (ex) 어떤 프로젝트에 패치를 보냈고 그 프로젝트의 담당자가 패치를 적용했다면 두 명의 정보 중
@@ -258,7 +262,7 @@ git status -v # 변경사항 확인
 
     # 이전 커밋을 롤백
     git revert commit-id
-    
+
 ```
 
 ## Restore
@@ -406,7 +410,5 @@ git status -v # 변경사항 확인
 
 ```bash
  echo "Hello world"
- 
+
 ```
-
-
