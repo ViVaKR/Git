@@ -408,7 +408,13 @@ git status -v # 변경사항 확인
 * 폴더 내부 또는 서브 폴더의 db.bak 파일
     folder/\*\*/db.bak
 
+
 ```bash
- echo "Hello world"
+    $ git log --oneline --decorate --graph --all
+
+
+
+
+
 
 ```
