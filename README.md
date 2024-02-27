@@ -443,11 +443,37 @@ $ `git log --pretty=format:"%h - %an, %ar : %s"` : 결과를 포맷 일치 파�
 =======
 ## 과거로 돌아가기
 
-    >- reset  : 이전 기록을 삭제하는 방식으로 회귀
+    >- git log 또는 reflog 명령을 사용하여 되돌릴 커밋의 ID 를 찾기
+
+    >- reset
+        - 이전 기록을 삭제하는 방식으로 회귀,
         - 특정 커밋 까지 모두 취소함
-    >- revert : 이전 기록위에 추가하는 방식으로 회귀 (복원 기록 자체를 기록으로 남길 때)
+
+    >- revert
+        - 이전 기록위에 추가하는 방식으로 회귀
+        - 복원 기록 자체를 기록으로 남길 때
         - 해당 커밋의 작업만 취소하고 새로운 커밋을 생성함.
         - 협업시 한번 공유된 기록이 있을 시 사용함
+
+    >- restore :
+        - git restore --staged hello.c #-> 수정 원본은 복원하지 않음, Add 만 취소.
+        - git restore --worktree hello.c #-> 수정 원본을 복원함 Add 하기 전.
+        - git restore --source=HEAD --staged --worktree hello.c # 커밋하기 전에 원상복구 하기
+        - git restore -W@ -SQ hello.c
+        ________                          ______________________                ________________
+        | HEAD |  <-- restor --staged --> | STAGE AREA (Index) | <-- restor --> | Working TREE |
+        --------                          ----------------------                ----------------
+                  <-------(commit)                               <-------(add)
+                                                 ^                                             ^
+        |----------------------------------------|---------------------------------------------|
+                                        restore --staged --worktree
+
+    >- git checkout
+        -
+        -
+
+    >- git switch
+> Commands
 
 ```bash
 
@@ -462,7 +488,35 @@ git reset f48441c33
 
 ```
 
-# before reset -> HEAD@{6}
+> 테스트 커밋 작성 후 Revert 실행
+
+```bash
+
+$ touch alpha.html
+$ git add . && git commit -m "1st git commit: file 1"
+
+$ touch beta.html
+$ git add . && git commit -m "2nd git commit: files 2"
+
+$ touch chrlie.html
+$ git add . && git commit -m "3rd git commit: files 3"
+
+$ touch delta.html
+$ git add . && git commit -m "4th git commit: files 4"
+
+$ touch elis.html
+$ git add . && git commit -m "5th git commit: files 5"
+
+$ ls
+
+$ git reflog
+$ git revert HEAD@{2}
+
+>-> deleted 'charlie.html' file, other files is not deleted
+
+```
+
+    >- e.g. before reset -> HEAD@{6}
 
 ```bash
 f86c30d (HEAD -> main) HEAD@{0}: commit: modify main-note for test
@@ -472,15 +526,6 @@ f86c30d (HEAD -> main) HEAD@{0}: commit: modify main-note for test
 186934f (origin/main, origin/HEAD) HEAD@{4}: reset: moving to HEAD
 186934f (origin/main, origin/HEAD) HEAD@{5}: commit: After unset and re commit
 9ba11eb HEAD@{6}: commit: Create new main-note
-4c28f33 HEAD@{7}: pull (finish): returning to refs/heads/main
-4c28f33 HEAD@{8}: pull (pick): Modify note add line seq command
-347552d HEAD@{9}: pull (pick): Test Commit
-9aca440 HEAD@{10}: pull (pick): Create Temp
-3bf9987 HEAD@{11}: pull (start): checkout 3bf99870b9f11ab8100eec79b8e5b1f279415265
-8dae175 HEAD@{12}: commit: Modify note add line seq command
-f67a8f5 HEAD@{13}: commit: Test Commit
-2a7879a HEAD@{14}: commit: Create Temp
-40968fe HEAD@{15}: clone: from github.com:ViVaKR/Temp.git
 
 $ nl main-note
      1	1 3 5 7 9 11 13 15 17 19
@@ -497,7 +542,7 @@ $ nl main-note
 
 $ git reset --hard HEAD@{7}
 
->- result
+>- results
 ◯ ⭄ git log --pretty=oneline
 4c28f3327588c0f21d2486f2848c98e6a3719d0a (HEAD -> main) Modify note add line seq command
 347552d5a16142e2456c30579f742d885b7e8d0e Test Commit
@@ -505,22 +550,18 @@ $ git reset --hard HEAD@{7}
 3bf99870b9f11ab8100eec79b8e5b1f279415265 Create demoA
 ca1843f8491c613c452810b76bbb694e1253a32c Create demoB
 cbf73d85e0d57229f7974d6076ac44961568f3a8 Rebase demo
-56d72370a700efdd0e62d8bc513ecda052b89b0f Modified from B
-ace646a86ba0ea0f8c61a24888f24ddd2d9c496d Rebase demo
-05d48d991059a359a0b80f0b6934fc906cfc4ea9 Create demo
-40968fee05de47a4b02e3cdec27c9059a88e069f Add For GMap WinForm[Naver]
-51f0ab178cf0ca9ff40942b883b2f36538fcb379 Initial commit
 
 $ nl main
 ◯ ⭄ nl main-note
 nl: main-note: No such file or directory
-# reset 으로 -> 파일도 삭제되었음..
 
-# 백업 본으로 원상복구 하기
+>- reset 으로 -> 파일도 삭제되었음..
+
+>- 백업 본으로 원상복구 하기
 $ git reset --hard
 
 
-# Revert : 해당 커밋만 새로 추가
+>-  Revert : 해당 커밋만 새로 추가
 $ git revert c571e7318ec04a745202b548c5d5e01a1ee64e99 # 자동 커밋
 $ git revert --no-commit <uuid>
 
