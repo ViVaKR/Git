@@ -21,10 +21,18 @@
     # warn : 개행문자가 혼재할 경우 경고를 출력하고 처리는 계속 진행함
     # false :  core.autocrlf 설정에 의해 변환  수행
     git config --global core.safecrlf false
+
     git config --global core.editor "code --wait"
+    git config --global core.editor "mvim -f"  # using mac vim
     git config --global color.ui true
     git config --global --list # 전역설정 확인
     git add -h # Help
+
+    # remove config global
+    git config --global --unset core.excludesfile
+
+
+
 ```
 
 ## Git 저장소 생성
@@ -42,7 +50,7 @@
     git rm file-name --cached file-name  # staging area 에서만 제거하고 워킹에서는 지우지 않음
     git rm log/\*.log   # 패턴 사용으로 다수의 파일 또는 디렉토리 삭제하기
     git rm \*~          # ~ 로 끝나는 파일을 모두 삭제
-    git mv README.md  CHANGE.md     # 파일 이름 변경하기
+    git mv README.md CHANGE.md     # 파일 이름 변경하기
     git commit -m "Add new file README"
     git remote add origin git@github.com:...? # 푸시할 원격 저장소 추가 (처음 한번)
     git remove -v # 모든 원격 리포지토리 보기
@@ -111,10 +119,19 @@
     git add ./src # src 디렉토리의 모든 변경사항을 스테이지에 올림
     git add -p # 변경된 사항 하나하나 확인하면서 스테이지에 올림
 
-    # add 취소
-    git restore --staged `<file>` # 특정 파일 add 취소
+    # Cancel `add` 취소
+    git rm --cached <file>
+    git rm --cached -r .
 
-    # 커밋을 취소하고 해당 파일들은 staged 상태로
+    # git add 취소 후 직전 버전으로 복원
+    git reset Head --  # back to working directory
+    git restore <file> # 복원
+    git resotre --staged <file>
+
+    # read git file
+    cat `git ls-files | grep main-note`
+
+    # Cancel `commit` 커밋을 취소하고 해당 파일들은 staged 상태로
     # 워킹 디렉토리에 보존
     git reset --soft HEAD^
 
@@ -207,6 +224,8 @@ git status -v # 변경사항 확인
 
     # 로컬 디펙토리의 폴더는 유지하고 git 저장소에서만 폴더 삭제
     $ git rm --cached -r bin/
+
+    # 모두 삭제
     $ git commit -m "delete folder"
 
     # Remove from .gitignore #
@@ -217,30 +236,34 @@ git status -v # 변경사항 확인
     # all target from .gitignore
     $ git rm --cached `git ls-files -i -c --exclude-from=.gitignore`
 
+    # check git files
+    $ git ls-files
+
     $ git commit -m 'Removed all files that are in the .gitignore'
-    git push origin main
+    $ git push origin main
 ```
 
 ## 저장소 복제, Clone
 
-> $ git clone [깃링크](git@github.com:ViVaKR/GitNote.git)
-> $ git log : 상태 확인
->
-> > 순간순으로 커밋 히스토리 보여줌
-> > 가장 최근 커밋이 가장 먼저 표시됨
-> > $ `git log -p` : 각 커밋의 diff 결과 표시
-> > $ `git log -p -2` : 최근 두개의 결과만 표시, 즉 동료가 무엇을 했는지 확인가능
-> > $ `git log --stat` : 각 커밋의 통계 정보 조회, 요약정보는 가장 뒤에 표시됨
-> > $ `git log --pretty=oneline` : 각 커밋을 하나의 라인으로 보여줌
-> > $ `git log --pretty=format:"%h - %an, %ar : %s"` : 결과를 포맷 일치 파싱
-> >
-> > > format options :
-> > > %H, %h, %T, %t, %P, %p, %an, %ae, %ad, %ar, %cn, %ce, % %cd, %cr, %s
-> > > 저자(Author) : 원 작업을 수행한 사람
-> > > 커미터(Committer) : 마지막으로 이 작업을 적용한(저장소에 포함시킨) 사람
-> > >
-> > > > (ex) 어떤 프로젝트에 패치를 보냈고 그 프로젝트의 담당자가 패치를 적용했다면 두 명의 정보 중
-> > > > 당신이 저자이고 담당자가 커미터가 됨
+```bash
+$ git clone [깃링크](git@github.com:ViVaKR/GitNote.git)
+
+## 로그
+$ git log : 상태 확인
+$ `git log -p` : 각 커밋의 diff 결과 표시
+$ `git log -p -2` : 최근 두개의 결과만 표시, 즉 동료가 무엇을 했는지 확인가능
+$ `git log --stat` : 각 커밋의 통계 정보 조회, 요약정보는 가장 뒤에 표시됨
+$ `git log --pretty=oneline` : 각 커밋을 하나의 라인으로 보여줌
+$ `git log --pretty=format:"%h - %an, %ar : %s"` : 결과를 포맷 일치 파싱
+
+# format options :
+# %H, %h, %T, %t, %P, %p, %an, %ae, %ad, %ar, %cn, %ce, % %cd, %cr, %s
+# 저자(Author) : 원 작업을 수행한 사람
+# 커미터(Committer) : 마지막으로 이 작업을 적용한(저장소에 포함시킨) 사람
+# (ex) 어떤 프로젝트에 패치를 보냈고 그 프로젝트의 담당자가 패치를 적용했다면 두 명의 정보 중
+# 당신이 저자이고 담당자가 커미터가 됨
+
+```
 
 ## 되돌리기 (Undo)
 
@@ -251,16 +274,16 @@ git status -v # 변경사항 확인
 ```bash
 
     # 가장 최근의 커밋을 수정하고 변경 내용을 추가
-    git commit --amend
+    $ git commit --amend
 
     # 준비되지 않은 변경사항 되돌리기
-    git checkout filename
+    $ git checkout filename
 
     # 마지막 커밋 롤백
-    git revert HEAD
+    $ git revert HEAD
 
     # 이전 커밋을 롤백
-    git revert commit-id
+    $ git revert commit-id
 
 ```
 
@@ -361,7 +384,7 @@ git status -v # 변경사항 확인
     git reset HEAD -p
 
     # 해당 시점으로 롤백 이후 작업 모두 삭제
-    git reset --hard uuid
+    git reset --hard <uuid>
 
 ```
 
@@ -408,7 +431,97 @@ git status -v # 변경사항 확인
 * 폴더 내부 또는 서브 폴더의 db.bak 파일
     folder/\*\*/db.bak
 
-```bash
- echo "Hello world"
+## 과거로 돌아가기
 
+    >- reset  : 이전 기록을 삭제하는 방식으로 회귀
+        - 특정 커밋 까지 모두 취소함
+    >- revert : 이전 기록위에 추가하는 방식으로 회귀 (복원 기록 자체를 기록으로 남길 때)
+        - 해당 커밋의 작업만 취소하고 새로운 커밋을 생성함.
+        - 협업시 한번 공유된 기록이 있을 시 사용함
+
+```bash
+
+git reflog
+
+git reset --hard HEAD@{돌아갈 번호}
+git reset --hard <uuid>
+
+git reset HEAD@{1}
+git reset f48441c33
+
+```
+
+# before reset -> HEAD@{6}
+
+```bash
+f86c30d (HEAD -> main) HEAD@{0}: commit: modify main-note for test
+0e3de9b HEAD@{1}: reset: moving to HEAD
+0e3de9b HEAD@{2}: commit: Add main-note
+186934f (origin/main, origin/HEAD) HEAD@{3}: reset: moving to HEAD
+186934f (origin/main, origin/HEAD) HEAD@{4}: reset: moving to HEAD
+186934f (origin/main, origin/HEAD) HEAD@{5}: commit: After unset and re commit
+9ba11eb HEAD@{6}: commit: Create new main-note
+4c28f33 HEAD@{7}: pull (finish): returning to refs/heads/main
+4c28f33 HEAD@{8}: pull (pick): Modify note add line seq command
+347552d HEAD@{9}: pull (pick): Test Commit
+9aca440 HEAD@{10}: pull (pick): Create Temp
+3bf9987 HEAD@{11}: pull (start): checkout 3bf99870b9f11ab8100eec79b8e5b1f279415265
+8dae175 HEAD@{12}: commit: Modify note add line seq command
+f67a8f5 HEAD@{13}: commit: Test Commit
+2a7879a HEAD@{14}: commit: Create Temp
+40968fe HEAD@{15}: clone: from github.com:ViVaKR/Temp.git
+
+$ nl main-note
+     1	1 3 5 7 9 11 13 15 17 19
+     2	git reset HEAD --
+     3	      2월 2024
+     4	일 월 화 수 목 금 토
+     5	             1  2  3
+     6	 4  5  6  7  8  9 10
+     7	11 12 13 14 15 16 17
+     8	18 19 20 21 22 23 24
+     9	25 26 27 28 29
+    10
+    11	---------------------
+
+$ git reset --hard HEAD@{7}
+
+>- result
+◯ ⭄ git log --pretty=oneline
+4c28f3327588c0f21d2486f2848c98e6a3719d0a (HEAD -> main) Modify note add line seq command
+347552d5a16142e2456c30579f742d885b7e8d0e Test Commit
+9aca4403e79fc763befaa5f660b24b0b3639a1ec Create Temp
+3bf99870b9f11ab8100eec79b8e5b1f279415265 Create demoA
+ca1843f8491c613c452810b76bbb694e1253a32c Create demoB
+cbf73d85e0d57229f7974d6076ac44961568f3a8 Rebase demo
+56d72370a700efdd0e62d8bc513ecda052b89b0f Modified from B
+ace646a86ba0ea0f8c61a24888f24ddd2d9c496d Rebase demo
+05d48d991059a359a0b80f0b6934fc906cfc4ea9 Create demo
+40968fee05de47a4b02e3cdec27c9059a88e069f Add For GMap WinForm[Naver]
+51f0ab178cf0ca9ff40942b883b2f36538fcb379 Initial commit
+
+$ nl main
+◯ ⭄ nl main-note
+nl: main-note: No such file or directory
+# reset 으로 -> 파일도 삭제되었음..
+
+# 백업 본으로 원상복구 하기
+$ git reset --hard
+
+
+# Revert : 해당 커밋만 새로 추가
+$ git revert c571e7318ec04a745202b548c5d5e01a1ee64e99 # 자동 커밋
+$ git revert --no-commit <uuid>
+
+>- result
+(to added new commit) --> 87bd6f0cea319330278fe5619759d5b1dcbe3f97 (HEAD -> vivmac) Revert "rollback demo"
+5f3ec3e42d152af55ecb69b0a9d1bd7c8bf01c39 Create temp.log and move to temp.txt
+a2341dc0c15a4e2857208b3e2eac11867bc25121 (origin/vivmac) Create foler fd and touch files
+10b234ad509e93425b6c057257fb679b80008ba5 Create new main-note
+(from) --> c571e7318ec04a745202b548c5d5e01a1ee64e99 rollback demo
+0ef41fdd822f1dd5604b93095926a1981755bc47 modified README
+
+>- 충돌 발생시 해결 후 -> $ git revert --continue
+
+>- 다시 깨끗하게 복구 -> $ git reset -hard <uuid>
 ```
