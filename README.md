@@ -24,7 +24,6 @@
     git config --global core.editor "code --wait"
     git config --global color.ui true
     git config --global --list # 전역설정 확인
-
     git add -h # Help
 ```
 
@@ -269,6 +268,7 @@ git status -v # 변경사항 확인
 
 ```bash
     git add .
+
     # 파일상태를 Unstage 로 변경하기
     git restore --staged README.md
     git reset HEAD <file>
