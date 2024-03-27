@@ -31,8 +31,6 @@
     # remove config global
     git config --global --unset core.excludesfile
 
-
-
 ```
 
 ## Git 저장소 생성
