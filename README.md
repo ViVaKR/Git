@@ -1276,6 +1276,8 @@ git log --stat
 git remote -v
 git fetch origin
 
+git remote
+
 git remote show origin
 
 # 리모트의 vivmac 브랜치 삭제
@@ -1283,4 +1285,22 @@ git push origin --delete vivmac
 
 git remote rename abc def
 
+git remote remove def
+
+git last
+
+git branch testing
+git checkout testing
+
+git log --oneline --decorate
+
+
+git mergetool
+git branch --no-merged
+git branch --merged
 ```
+
+## Rebase vs Merge
+
+1. Rebase
+2. Merge
