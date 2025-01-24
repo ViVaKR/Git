@@ -2,3 +2,8 @@ top
 
 
 git commit --amend
+
+
+checkout file
+
+restore --staged file
