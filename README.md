@@ -1268,4 +1268,7 @@ git rebase origin/main
 
 ```bash
 git diff
+git diff --cached
+
+git log --stat
 ```
