@@ -5,7 +5,7 @@ Mega Collection of PowerShell Scripts
 
 **[Download](https://github.com/fleschutz/PowerShell/releases) | [FAQ](docs/FAQ.md)** | **Note:** the scripts support Unicode - a modern console is recommended (e.g. *Windows Terminal*)
 
-🔊 Scripts for Audio & Voice 
+🔊 Scripts for Audio & Voice
 -----------------------------
 
 | Script                                               | Description                                                                                     |
@@ -39,7 +39,6 @@ Mega Collection of PowerShell Scripts
 | [turn-volume-off.ps1](scripts/turn-volume-off.ps1)   | Turns audio off. [Read more »](docs/turn-volume-off-audio.md)                                  |
 | [turn-volume-on.ps1](scripts/turn-volume-on.ps1)     | Turns audio on. [Read more »](docs/turn-volume-on.md)                                          |
 | [turn-volume-up.ps1](scripts/turn-volume-up.ps1)     | Turns the audio volume up. [Read more »](docs/turn-volume-up.md)                               |
-
 
 ⚙️ Scripts to Manage Computers
 -------------------------------
@@ -89,7 +88,6 @@ Mega Collection of PowerShell Scripts
 | [upgrade-ubuntu.ps1](scripts/upgrade-ubuntu.ps1)     | Upgrades Ubuntu Linux to the latest (LTS) release. [Read more »](docs/upgrade-ubuntu.md)         |
 | [wake-up.ps1](scripts/wake-up.ps1)                   | Wakes up a computer using Wake-on-LAN. [Read more »](docs/wakeup.md)                             |
 | [windefender.ps1](scripts/windefender.ps1)           | Turn Windows Defender on/off/check real time monitoring. [Read more »](docs/windefender.md)      |
-
 
 💻 Scripts for the Desktop
 ---------------------------
@@ -162,7 +160,7 @@ Mega Collection of PowerShell Scripts
 | [save-screenshot.ps1](scripts/save-screenshot.ps1)   | Saves a single screenshot. [Read more...](docs/save-screenshot.md)         |
 | [set-wallpaper.ps1](scripts/set-wallpaper.ps1)       | Sets the given image as wallpaper. [Read more...](docs/set-wallpaper.md)           |
 
-📁 Scripts for Files & Folders 
+📁 Scripts for Files & Folders
 -------------------------------
 
 | Script                                               | Description                                                                                      |
@@ -173,7 +171,7 @@ Mega Collection of PowerShell Scripts
 | [cd-downloads.ps1](scripts/cd-downloads.ps1)         | Set the working directory to the user's downloads folder. [Read more...](docs/cd-downloads.md)        |
 | [cd-dropbox.ps1](scripts/cd-dropbox.ps1)             | Set the working directory to the user's Dropbox folder. [Read more...](docs/cd-dropbox.md)          |
 | [cd-home.ps1](scripts/cd-home.ps1)                   | Set the working directory to the user's home folder. [Read more...](docs/cd-home.md)             |
-| [cd-music.ps1](scripts/cd-music.ps1)                 | Set the working directory to the user's music folder. [Read more...](docs/cd-music.md)            |  
+| [cd-music.ps1](scripts/cd-music.ps1)                 | Set the working directory to the user's music folder. [Read more...](docs/cd-music.md)            |
 | [cd-onedrive.ps1](scripts/cd-onedrive.ps1)           | Set the working directory to the user's OneDrive folder. [Read more...](docs/cd-onedrive.md)         |
 | [cd-pics.ps1](scripts/cd-pics.ps1)                   | Set the working directory to the user's pictures folder. [Read more...](docs/cd-pics.md)             |
 | [cd-recycle-bin.ps1](scripts/cd-recycle-bin.ps1)     | Set the working directory to the user's recycle bin folder. [Read more...](docs/cd-recycle-bin.md)      |
@@ -181,7 +179,7 @@ Mega Collection of PowerShell Scripts
 | [cd-root.ps1](scripts/cd-root.ps1)                   | Set the working directory to the root directory. [Read more...](docs/cd-root.md)             |
 | [cd-scripts.ps1](scripts/cd-scripts.ps1)             | Set the working directory to the PowerShell Scripts folder. [Read more...](docs/cd-scripts.md)          |
 | [cd-ssh.ps1](scripts/cd-ssh.ps1)                     | Set the working directory to the user's SSH folder. [Read more...](docs/cd-ssh.md)              |
-| [cd-up.ps1](scripts/cd-up.ps1)                       | Set the working directory to one directory level up. [Read more...](docs/cd-up.md)               | 
+| [cd-up.ps1](scripts/cd-up.ps1)                       | Set the working directory to one directory level up. [Read more...](docs/cd-up.md)               |
 | [cd-up2.ps1](scripts/cd-up2.ps1)                     | Set the working directory to two directory levels up. [Read more...](docs/cd-up2.md)              |
 | [cd-up3.ps1](scripts/cd-up3.ps1)                     | Set the working directory to three directory levels up. [Read more...](docs/cd-up3.md)              |
 | [cd-up4.ps1](scripts/cd-up4.ps1)                     | Set the working directory to four directory levels up. [Read more...](docs/cd-up4.md)              |
@@ -232,7 +230,6 @@ Mega Collection of PowerShell Scripts
 | [convert-txt2wav.ps1](scripts/convert-txt2wav.ps1)     | Converts text to a .WAV audio file. [Read more »](docs/convert-txt2wav.md)                               |
 | [export-to-manuals.ps1](scripts/export-to-manuals.ps1) | Exports all scripts as manuals. [Read more »](docs/export-to-manuals.md)                                 |
 
-
 📝 Scripts for Git
 -------------------
 
@@ -265,7 +262,7 @@ Mega Collection of PowerShell Scripts
 | [sync-repo.ps1](scripts/sync-repo.ps1)               | Synchronizes a Git repository by pull & push. [Read more »](docs/sync-repo.md)                   |
 | [write-changelog.ps1](scripts/write-changelog.ps1)   | Writes a changelog from Git commits. [Read more »](docs/write-changelog.md)                      |
 
-🔎 Scripts for PowerShell 
+🔎 Scripts for PowerShell
 ------------------------
 
 | Script                                                 | Description                                                                                            |
@@ -283,7 +280,7 @@ Mega Collection of PowerShell Scripts
 | [new-script.ps1](scripts/new-script.ps1)               | Creates a new PowerShell script. [Read more...](docs/new-script.md)                                    |
 | [set-profile.ps1](scripts/set-profile.ps1)             | Updates your PowerShell user profile. [Read more...](docs/set-profile.md)                              |
 
-🛒 Various PowerShell Scripts 
+🛒 Various PowerShell Scripts
 ------------------------------
 
 | Script                                               | Description                                                                                         |
@@ -357,8 +354,10 @@ Mega Collection of PowerShell Scripts
 
 📧 Feedback
 ------------
+
 Send your email feedback to: `markus.fleschutz [at] gmail.com`
 
 🤝 License & Copyright
 -----------------------
+
 This open source project is licensed under the CC0-1.0 license. All trademarks are the property of their respective owners.
