@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-<!-- markdownlint-disable MD000 -->
-
 # Git
 
 ## Github 회원가입 : [Github](https://github.com "Github")
@@ -31,8 +28,6 @@
 
     # remove config global
     git config --global --unset core.excludesfile
-
-
 
 ```
 
@@ -578,6 +573,7 @@ a2341dc0c15a4e2857208b3e2eac11867bc25121 (origin/vivmac) Create foler fd and tou
 
 >- 다시 깨끗하게 복구 -> $ git reset -hard <uuid>
 ```
+
 =======
 <!-- markdownlint-disable MD000 -->
 
@@ -1145,4 +1141,139 @@ a2341dc0c15a4e2857208b3e2eac11867bc25121 (origin/vivmac) Create foler fd and tou
 
 >- 다시 깨끗하게 복구 -> $ git reset -hard <uuid>
 ```
->>>>>>> e1dd256 (Remove Others)
+
+```bash
+
+# 리베이스 전
+git fetch origin
+git diff main origin/main  # 로컬 main과 원격 main의 차이점 확인
+git pull origin main
+
+# 자동 병합 가능한 상태 유지
+git merge --no-commit --no-ff **branch_name**
+
+# 충돌 가능성을 줄이는 병합 전략
+git pull --ff-only
+
+# 리베이스 전에 작업 브랜치 정리
+git stash
+
+git stash pop
+
+
+
+```
+
+<pre>
+***리베이스의 최선의 실천***
+	•	동기화 상태 유지: 리베이스 전에 항상 git fetch와 git pull로 동기화 상태를 확인하세요.
+	•	작은 단위 작업: 커밋을 논리적인 단위로 나누세요.
+	•	병합 전략 선택: 협업 중이라면 병합(merge)을 사용하고, 개인 브랜치에서만 리베이스를 사용하세요.
+	•	충돌 자동화 도구 사용: git rerere를 활성화해 충돌 해결 부담을 줄이세요.
+
+이렇게 하면 리베이스 충돌로 인한 불편을 최소화할 수 있습니다.
+
+---
+
+git rebase는 브랜치를 새로운 기반(commit base) 위로 옮기는 작업입니다. 기존 커밋 기록을 새롭게 쌓아 올리면서, 기존 커밋을 재작성하는 방식으로 동작합니다. 이 과정은 충돌 관리와 병합 기록을 깔끔하게 유지하는 데 유용하지만, 정확한 흐름을 이해하고 사용하는 것이 중요합니다.
+
+git rebase의 기본 흐름
+
+다음은 git rebase의 작업이 진행되는 구체적인 단계입니다:
+
+1. 현재 브랜치와 대상 브랜치의 커밋 차이 계산
+
+git rebase <base-branch>
+
+	•	예를 들어, 현재 브랜치가 feature이고, main을 기준으로 리베이스한다고 가정:
+
+git rebase main
+
+	•	Git은 feature 브랜치가 main에 없는 커밋을 계산합니다.
+
+예시 커밋 그래프 (리베이스 전):
+
+main:    A --- B --- C
+                  \
+feature:            D --- E --- F
+
+여기서 D, E, F는 feature 브랜치의 커밋이며, A, B, C는 main 브랜치의 커밋입니다.
+
+2. 기존 커밋을 임시로 “떼어내기” (stack 생성)
+	•	feature 브랜치의 커밋(D, E, F)을 일시적으로 저장(stash)합니다.
+	•	이 과정은 재작성 대상 커밋을 “적용 가능한 패치” 형태로 변환하는 과정입니다.
+
+3. 대상 브랜치로 HEAD 이동
+	•	현재 브랜치(feature)의 기반을 대상 브랜치(main)의 끝(C)으로 변경합니다.
+	•	feature 브랜치는 main 브랜치와 동일한 위치로 재배치됩니다.
+
+중간 상태 (HEAD 이동):
+
+main:    A --- B --- C
+         ^
+feature: HEAD
+
+4. 커밋 하나씩 재적용 (Replay)
+	•	feature 브랜치의 기존 커밋(D, E, F)을 순서대로 새로운 기반 위에 적용합니다.
+	•	이 과정에서 충돌이 발생할 수 있으며, 사용자가 충돌을 해결해야 합니다.
+	•	충돌 시:
+
+git status  # 충돌 파일 확인
+git add <resolved-file>  # 충돌 해결 후 파일 스테이징
+git rebase --continue  # 리베이스 재개
+
+	•	충돌 취소 시:
+
+git rebase --abort  # 리베이스를 중단하고 이전 상태로 복구
+
+리베이스 중 상태:
+
+main:    A --- B --- C
+                  \
+feature:            D' --- E' --- F'
+
+5. 새 브랜치로 업데이트
+	•	모든 커밋이 새로운 기반 위로 재적용되면 feature 브랜치가 업데이트됩니다.
+
+최종 상태 (리베이스 후):
+
+main:    A --- B --- C
+                  \
+feature:            D' --- E' --- F'
+
+	•	D’, E’, F’는 기존 커밋(D, E, F)와 동일한 내용이지만, 새로운 커밋 ID를 가지며 main 기반으로 변경되었습니다.
+
+리베이스 흐름의 주요 옵션
+	1.	git rebase --interactive (대화형 리베이스)
+	•	리베이스 중 커밋을 수정하거나, 병합하거나, 삭제할 수 있는 기능을 제공합니다.
+
+git rebase -i <base-branch>
+
+	•	커밋 목록이 편집 가능한 상태로 열리며, 각 커밋에 대해 pick, edit, squash 등의 작업을 지정할 수 있습니다.
+
+	2.	git rebase --onto (특정 기준으로 이동)
+	•	기존 브랜치의 일부만 재배치하고 싶을 때 사용:
+
+git rebase --onto <new-base> <start-point> <branch>
+
+	•	예: feature의 마지막 3개의 커밋만 다른 기반으로 이동:
+
+git rebase --onto main feature~3 feature
+
+리베이스 vs 병합 (merge)
+	•	리베이스는 커밋 히스토리를 깔끔하고 선형으로 유지하지만, 기존 커밋을 재작성하므로 공동 작업 시 주의가 필요합니다.
+	•	**병합(merge)**는 모든 변경 기록을 유지하며, 원래 커밋을 변경하지 않습니다.
+
+최선의 리베이스 사용 방법
+	1.	로컬에서만 리베이스를 사용하세요.
+	•	이미 공유된 브랜치(원격 저장소에 푸시된 경우)에서 리베이스를 사용하면, 다른 사용자가 혼란스러울 수 있습니다.
+	2.	리베이스 전 원격 상태를 동기화하세요.
+
+git fetch origin
+git rebase origin/main
+
+	3.	충돌 관리에 유의하세요.
+	•	충돌 해결 후 반드시 git add와 git rebase --continue를 사용해 리베이스를 계속 진행하세요.
+
+리베이스를 올바르게 사용하면 깔끔한 히스토리를 유지하며 효율적으로 협업할 수 있습니다.
+</pre>
