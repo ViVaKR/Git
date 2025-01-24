@@ -19,7 +19,6 @@
     # warn : 개행문자가 혼재할 경우 경고를 출력하고 처리는 계속 진행함
     # false :  core.autocrlf 설정에 의해 변환  수행
     git config --global core.safecrlf false
-
     git config --global core.editor "code --wait"
     git config --global core.editor "mvim -f"  # using mac vim
     git config --global color.ui true
@@ -40,7 +39,7 @@
     git init .          # 초기화 .git 로컬 저장소 생성
     git add README.md   # or `$ git add .` 스태이징 에리어에 추적할 파일 추가
     git status          # git status -s (짤막하게 확인하기, --short)
-    git diff            # 수정했지만 아직 staged 상태가 아닌 파일을 배교해 보기
+    git diff            # 수정했지만 아직 staged 상태가 아닌 파일을 비교해 보기
     git diff --staged   # 저장소에 커밋한 것과 staging area 에 있는 것을 비교
     git rm file-name -f   # 실제 파일도 삭제됨
     git rm file-name --cached file-name  # staging area 에서만 제거하고 워킹에서는 지우지 않음
@@ -49,7 +48,7 @@
     git mv README.md CHANGE.md     # 파일 이름 변경하기
     git commit -m "Add new file README"
     git remote add origin git@github.com:...? # 푸시할 원격 저장소 추가 (처음 한번)
-    git remove -v # 모든 원격 리포지토리 보기
+    git remote -v # 모든 원격 리포지토리 보기
     git remote show origin #
     git clone https://github.com/ViVaKR/Git.git
     git log -p  # 커밋기록 및 변경사항 포함.
@@ -200,7 +199,7 @@ git status -v # 변경사항 확인
     $ git config --global core.excludesFile "$Env:USERPROFILE\.gitignore"
 ```
 
-## Delete file or floder
+## Delete file or folder
 
 ```bash
 
@@ -427,18 +426,8 @@ $ `git log --pretty=format:"%h - %an, %ar : %s"` : 결과를 포맷 일치 파�
 * 폴더 내부 또는 서브 폴더의 db.bak 파일
     folder/\*\*/db.bak
 
-<<<<<<< HEAD
-
 ```bash
     $ git log --oneline --decorate --graph --all
-
-
-
-
-
-=======
-## 과거로 돌아가기
-
     >- git log 또는 reflog 명령을 사용하여 되돌릴 커밋의 ID 를 찾기
 
     >- reset
@@ -480,7 +469,6 @@ git reset --hard <uuid>
 
 git reset HEAD@{1}
 git reset f48441c33
->>>>>>> 63466a3 (README : Added Reset vs Revert Example)
 
 ```
 
@@ -1277,3 +1265,7 @@ git rebase origin/main
 
 리베이스를 올바르게 사용하면 깔끔한 히스토리를 유지하며 효율적으로 협업할 수 있습니다.
 </pre>
+
+```bash
+git diff
+```
