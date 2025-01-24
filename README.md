@@ -1298,9 +1298,55 @@ git log --oneline --decorate
 git mergetool
 git branch --no-merged
 git branch --merged
+
+# 로컬 브랜치 삭제
+git branch -d feature
+
+# 리모트 브랜치 삭제
+git push origin --delete feature
 ```
 
 ## Rebase vs Merge
 
 1. Rebase
 2. Merge
+
+* Example
+
+```bash
+# main 브랜치에서 작업 시작
+git checkout main
+
+# feature 브랜치 생성 및 체크아웃
+git checkout -b feature
+
+# demo-a.txt 파일 생성 (feature 브랜치)
+echo "This is demo-a.txt in feature branch" > demo-a.txt
+git add demo-a.txt
+git commit -m "Add demo-a.txt in feature branch"
+
+# main 브랜치로 돌아가기
+git checkout main
+
+# demo-b.txt 파일 생성 (main 브랜치)
+echo "This is demo-b.txt in main branch" > demo-b.txt
+git add demo-b.txt
+git commit -m "Add demo-b.txt in main branch"
+
+# feature 브랜치를 main 브랜치에 rebase
+git checkout feature
+git rebase main
+
+# 충돌이 발생할 경우 충돌 해결 후 rebase 계속 진행
+# git add demo-a.txt demo-b.txt
+# git rebase --continue
+
+# main 브랜치로 돌아가기
+git checkout main
+
+# feature 브랜치를 main 브랜치에 병합 (선택 사항)
+git merge feature
+
+# feature 브랜치 삭제
+git branch -d feature
+```
