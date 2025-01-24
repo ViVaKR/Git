@@ -7,3 +7,6 @@ git commit --amend
 checkout file
 
 restore --staged file
+
+
+git checkout -- temp.txt # 복원, 수정한 내용은 모두 사라짐

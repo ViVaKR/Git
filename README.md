@@ -1271,4 +1271,16 @@ git diff
 git diff --cached
 
 git log --stat
+
+
+git remote -v
+git fetch origin
+
+git remote show origin
+
+# 리모트의 vivmac 브랜치 삭제
+git push origin --delete vivmac
+
+git remote rename abc def
+
 ```
