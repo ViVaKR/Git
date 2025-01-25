@@ -1276,8 +1276,8 @@ git diff --staged
 git diff --cached
 
 git log --stat
-
-
+git log --patch -2
+git log --pretty=oneline
 git remote -v
 git fetch origin
 
