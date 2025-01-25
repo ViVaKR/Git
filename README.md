@@ -1267,7 +1267,12 @@ git rebase origin/main
 </pre>
 
 ```bash
+git init
+git add .
+git commit -m "inital project version"
+
 git diff
+git diff --staged
 git diff --cached
 
 git log --stat
@@ -1349,4 +1354,24 @@ git merge feature
 
 # feature 브랜치 삭제
 git branch -d feature
+
+git remote
+git remote -v
+git remote show origin
+
+git cat-file -p HEAD
+git ls-tree -r HEAD
+
+gh auth login
+gh repo list
+gh repo clone owner/repo-name
+gh repo create repo-name
+gh issue list
+gh issue create
+gh pr list
+gh pr create
+gh copilot explain "..."
+gh copilot --help
+
+# VCS
 ```
