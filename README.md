@@ -1266,6 +1266,14 @@ git rebase origin/main
 리베이스를 올바르게 사용하면 깔끔한 히스토리를 유지하며 효율적으로 협업할 수 있습니다.
 </pre>
 
+## HEAD
+
+* 현재 브랜치 마지막 커밋의 스냅샷
+
+## Index
+
+## Working Directory
+
 ```bash
 git init
 git add .
@@ -1281,8 +1289,27 @@ git log --pretty=oneline
 git remote -v
 git fetch origin
 
-git remote
+# amend:
+# --> 마지막 커밋 작업에서 아주 살짝 뭔가 빠뜨린 것을 넣거나 변경하는것을
+# 새 커밋으로 분리하지 않고 하나의 커밋에서 처리하는 것.
+git commit -m "initial commit"
+git add forgotten_file
+git commit --amend
 
+
+# reset:
+# -->
+git add *
+git reset HEAD
+git reset --soft HEAD~
+git commit --amend
+git reset --hard HEAD~
+git reset file.txt # git add file.txt 의 정확히 반대
+
+git cat-file -p HEAD
+git ls-tree -r HEAD
+
+git remote
 git remote show origin
 
 # 리모트의 vivmac 브랜치 삭제
@@ -1373,5 +1400,9 @@ gh pr create
 gh copilot explain "..."
 gh copilot --help
 
-# VCS
+
 ```
+
+* `git init` -> Working Directory
+* `git add` -> Index
+* `git commit` -> HEAD
