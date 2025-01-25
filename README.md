@@ -1305,6 +1305,7 @@ git reset --soft HEAD~
 git commit --amend
 git reset --hard HEAD~
 git reset file.txt # git add file.txt 의 정확히 반대
+git reset --mixed HEAD file.txt
 
 git cat-file -p HEAD
 git ls-tree -r HEAD
