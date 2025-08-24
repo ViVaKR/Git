@@ -51,16 +51,25 @@ git clean -Xf # 파일 삭제
 ## 커밋 취소 하기
 
 ```bash
-# 커밋 기록 자체를 말소
-# 꺽쇠 수만큼 이전으로 돌아감
-# ^: 한단계, ^^: 두단계, ~3: 세단계 즉 숫자로도 가능함.
 
-# git reset 옵션
+# git add . 한 것 취소
+git reset HEAD <파일명> # 특정 <파일명> 파일을 스테이지에서 제거 또는 모든 파일을 스테이지에서 제거 이때 <파일명> 은 생략
+
+# git commit --amend
+# 마지막 커밋 작업에서 아주 살짝 뭔가 빠뜨린 것을 살짝 넣거나 변경하는 것을 새로운 커밋을 만들지 않을때 즉 간단한 수정작업 커밋
+git commit -m 'initial commit'
+git add forgetten_file
+git commit --amend
+
+
+
+# reset
 # soft : 파일 보존, add 한 상태 + staged 상태
 # mixed : 파일 보존, add 하기 전 + unstaged 상태
 # hard : 파일 삭제, add 하기 전 + unstaged 상태, 모두 취소 작업내용 모두 다 사라짐으로 위험함.
-
-
+# 커밋 기록 자체를 말소
+# 꺽쇠 수만큼 이전으로 돌아감
+# ^: 한단계, ^^: 두단계, ~3: 세단계 즉 숫자로도 가능함.
 # reset 은 로그 자체를 지워 버림으로 미래로 되 돌릴수 없음
 git reset --soft HEAD^
 
@@ -92,5 +101,36 @@ git reset <이전 커밋번호 여섯자리>
 
 # <현재 커밋번호 여섯자리> 에서 이전으로 되돌려라 (생성 덮어쓰기)
 git revert <현재 커밋번호 여섯자리>
+
+```
+
+## git log
+
+```bash
+
+git log --oneline
+git log --graph
+git log --since="2 weeks age"
+git log --since=2.weeks
+git log -3 # -(n) 최근 n 개의  커밋만 조회
+git log -p -2 # 최근 2개, --patch: 각 커밋의 diff 결과 조회
+git log --stat # 각 커밋의 통계 정보 조회, 어떤 파일 얼마나 많은 파일이 수정됐는지등의 정보 조회
+
+git log --pretty=oneline
+git log --pretty=format:"%h - %an, %ar : %s"
+
+# pretty 옵션
+# - %H, h : 커밋 해시
+# - %T, t : 트리 해시
+# - %s : 요약
+# - %an, ae, ad, ar : (Author : 원래 작업을 수행한 원작자) 저자 이름, 메일, 시각, 상대적 시각
+# - %cn, ce, cd, cr : (Committer : 마지막으로 작업을 적용 저장소에 포함시킨 사람) 커밋한 이 이름, 메일, 시각, 상대적 시각
+
+# --since, --after : 명시한 날짜 이후의 커밋만 조회
+# --untile, --before : 명시한 날짜 이전의 커밋한 조회
+# --author : 입력한 저자의 커밋만 조회
+# --committer : 입력한 커미터의 커밋만 조회
+# --grep : 커밋 메시지 안의 텍스트 검색
+# --S : 커밋 변경(추가/삭제) 내용에서 텍스트 검색
 
 ```
