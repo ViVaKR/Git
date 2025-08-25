@@ -1,6 +1,6 @@
 # Gitignore
 
-## 규칙
+## 작성규칙
 
 `.env` : 확장자가 .env 인 모든 파일을 무시
 `dist/` : dist 폴더의 모든 파일을 무시
@@ -12,13 +12,69 @@
 `modules/` : 프로젝트의 모든 폴더 중 'modules' 라는 폴더명의 하위 파일은 모두 무시
 
 ```bash
-
-# 전역 설정
+# 전역 설정 파일
 git config --global core.excludesfile <filepath> 형식
-
 ```
 
+## Git 기본 명령어 모음
+
 ```bash
+
+# 기본 설정
+git config --global user.name "[사용자명]"
+git config --global user.email "[사용자 이메일 주소]"
+
+# 저장소 초기화
+git init
+
+# 스테이지 추가
+git add [파일이름.확장자]
+git add .
+git status
+
+# 스테이징 취소
+git restore --staged <fileName>
+# or
+git reset HEAD # 전체 취소
+
+# 커밋
+git commit -m "[message]"
+git commit -am "[message]"
+
+# 커밋 취소
+git revert [가장최근커밋해시] # 해당 커밋 이전 상태로 되돌리는 명령, 커밋을 삭제하지 않고 이전 커밋을 새로 복사 추가 방식.
+
+git reset --soft [id] # HEAD 만 바뀜
+git reset --mixed [id] # 기본값, staging 만 바뀜
+git reset --hard [id] # 워킹/스테이징 모두 바꿈
+
+git reset HEAD^ # 보편적인 방식, 현재 HEAD 의 이전 커밋으로 되돌리기
+git reset HEAD~2 # 현재로 부터 n번째 이전 커밋으로 되돌리기
+
+git reset [커밋해시] # 롤백할 커밋을 지정
+
+
+# 커밋 수정
+git commit -m "committing"
+git commit --amemd # 최신 커밋 수정
+
+
+# 커밋 내용 확인
+git log
+git shortlog
+git log --oneline
+git log --format=oneline
+git log -p
+git log --stat
+git log --graph
+git show [id]
+
+# 차이 확인
+git diff
+git diff --color-words
+
+
+# 환경설정 보기
 git config --edit --global
 
 git config list # View All Settings
@@ -47,8 +103,23 @@ git config --unset user.email
 git clean -Xn # 목록 표시
 git clean -Xf # 파일 삭제
 
-# 기타
+# 원격저장소
+git clone [원격저장소주소]
+git remote add origin [원격저장소주소]
+
+git fetch # 원격저장소의 커밋을 가져오기만 하고 merge 하지 않음
+
+git diff main origin/main
+
 git remote -v # url 보기
+
+git remote rename 기존이름 변경할이름
+git remote show 이름
+
+git push origin main
+git pull origin main
+
+git remote rm 이름 # 저장소제거
 ```
 
 ## 취소 하기
@@ -187,3 +258,39 @@ git log --pretty=format:"%h - %an, %ar : %s"
 *   **`restore` (파일 복원):** 가장 안전. 파일 수정/스테이징을 되돌릴 때.
 *   **`reset` (시간 여행):** 로컬 커밋을 되돌릴 때.
 *   **`revert` (이력 남기기):** 원격에 올라간 커밋을 안전하게 되돌릴 때.
+
+## 파일 생성(c.txt)후 되돌렸다 복원하는 예시
+
+```bash
+echo "ccc" >> c.txt
+git add c.txt
+git commit -m "Add c.txt file"
+git log -3
+git revert 07075b # 취소하기, 파일 (c.txt) 삭제
+git log -3 --format=oneline
+git status
+
+# 특정 커밋 버전 상태로 되돌리기 (파일복원)
+git restore --source=07075bf72f4540d3e07463ceb2171a9d7024d6a8 c.txt
+```
+
+
+## git push 취소하기
+
+## 수정된 파일 삭제하기
+
+```bash
+git restore 파일명
+```
+
+## 파일 삭제
+
+```bash
+
+# 로컬, 원격 저장소 모든 파일이 삭제됨
+git rm <fileName>
+
+# 커밋후 원격저장소만 해당 파일 삭제시
+git rm <filenName> --cached
+
+```

@@ -14,6 +14,7 @@ echo "*.log" >>.gitignore
 
 # 첫 커밋
 git add .
+
 git commit -m "Initial commit with README.md and .gitignore"
 
 # 원격 저장소 추가
