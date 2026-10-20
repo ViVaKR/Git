@@ -12,21 +12,28 @@
 ## Git 최초 환경설정
 
 ```bash
-    git config --global user.name "<이름>"
-    git config --global user.email "<이메일주소>"
+git config --global user.name "<이름>"
+git config --global user.email "<이메일주소>"
 
     # true : 개행문자가 혼재할 경우 안전을 위해 이후의 처리를 중단함
     # warn : 개행문자가 혼재할 경우 경고를 출력하고 처리는 계속 진행함
     # false :  core.autocrlf 설정에 의해 변환  수행
-    git config --global core.safecrlf false
-    git config --global core.editor "code --wait"
-    git config --global core.editor "mvim -f"  # using mac vim
-    git config --global color.ui true
-    git config --global --list # 전역설정 확인
-    git add -h # Help
+git config --global core.safecrlf false
+git config --global core.editor "code --wait"
+git config --global core.editor "mvim -f"  # using mac vim
+git config --global color.ui true
+git config --global --list # 전역설정 확인
+git config --global core.excludesfile ~/.gitignore_global
+git config --global push.autoSetupRemote true
+git config --global rerere.enabled true
+git config --global diff.algorithm histogram
+git config --global branch.sort -committerdate
+git config --global fetch.prune true
+git config --global alias.undo "reset --soft HEAD~1"
+git config --global alias.amend "commit --amend --no-edit"
 
-    # remove config global
-    git config --global --unset core.excludesfile
+# remove config global
+git config --global --unset core.excludesfile
 
 ```
 
@@ -1407,3 +1414,6 @@ gh copilot --help
 * `git init` -> Working Directory
 * `git add` -> Index
 * `git commit` -> HEAD
+
+
+---

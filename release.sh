@@ -1,7 +1,9 @@
 #!/bin/bash
+
 # 자동 릴리즈 생성 스크립리트
 # chmod +x release.sh
 # 사용법: ./release.sh "v0.1.1-test" "변경 내용 요약"
+#
 TAG=$1
 MESSAGE=$2
 
